@@ -10,7 +10,7 @@
         'Brainbean Apps, '
         'Odoo Community Association (OCA)',
     'license': 'AGPL-3',
-    'installable': True,
+    'installable': False,
     'application': False,
     'summary': 'Reminder notifications about planned activities',
     'depends': [

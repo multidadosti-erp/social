@@ -10,7 +10,7 @@
     'website': 'https://github.com/OCA/social',
     'license': 'AGPL-3',
     'category': 'Tools',
-    'installable': True,
+    'installable': False,
     "external_dependencies": {
         "python": ['premailer'],
     },

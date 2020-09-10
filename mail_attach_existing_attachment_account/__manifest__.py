@@ -17,6 +17,6 @@
     'data': [
         'wizard/account_invoice_send_view.xml',
     ],
-    'installable': True,
-    'auto_install': True,
+    'installable': False,
+    'auto_install': False,
 }

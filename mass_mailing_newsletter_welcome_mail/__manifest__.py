@@ -17,5 +17,5 @@
         "views/mail_mass_mailing_list.xml",
     ],
     'application': False,
-    'installable': True,
+    'installable': False,
 }

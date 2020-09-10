@@ -16,4 +16,5 @@
         "security/mail_template_substitution_rule.xml",
         "views/mail_template.xml",
     ],
+    'installable': False,
 }

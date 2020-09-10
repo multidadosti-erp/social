@@ -9,7 +9,7 @@
     'website': 'https://github.com/OCA/social',
     'author': 'Eficent, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
-    'installable': True,
+    'installable': False,
     'data': [
         'views/mail_activity_views.xml',
     ],

@@ -14,6 +14,6 @@
         "views/event_registration_views.xml",
     ],
     "license": "AGPL-3",
-    "installable": True,
-    "auto_install": True,
+    "installable": False,
+    "auto_install": False,
 }

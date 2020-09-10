@@ -22,5 +22,5 @@
         'views/res_partner_view.xml',
         'wizard/partner_mail_list_wizard.xml'
     ],
-    "installable": True,
+    "installable": False,
 }

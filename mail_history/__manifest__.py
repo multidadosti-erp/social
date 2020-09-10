@@ -10,7 +10,7 @@
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    'installable': True,
+    'installable': False,
     "depends": [
         "mail",
     ],

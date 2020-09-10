@@ -11,7 +11,7 @@
     "maintainers": ["eLBati"],
     "license": "LGPL-3",
     "application": False,
-    "installable": True,
+    "installable": False,
     "depends": [
         "fetchmail",
     ],

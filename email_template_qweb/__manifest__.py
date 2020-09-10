@@ -19,5 +19,5 @@
     "data": [
         "views/mail_template.xml",
     ],
-    'installable': True,
+    'installable': False,
 }

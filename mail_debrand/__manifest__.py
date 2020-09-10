@@ -12,7 +12,7 @@
     "website": "https://github.com/OCA/social/",
     "author": "Tecnativa, Eficent, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "installable": True,
+    "installable": False,
     "depends": [
         "mail",
     ],

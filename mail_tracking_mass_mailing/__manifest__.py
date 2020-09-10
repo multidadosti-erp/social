@@ -14,8 +14,8 @@
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
-    "installable": True,
-    'auto_install': True,
+    "installable": False,
+    'auto_install': False,
     "depends": [
         "mass_mailing",
         "mail_tracking",

@@ -25,4 +25,5 @@
         'views/assets.xml',
         'views/mail_message.xml',
     ],
+    'installable': False,
 }

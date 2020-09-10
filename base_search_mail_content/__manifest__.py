@@ -18,5 +18,5 @@
     ],
     "depends": ["mail", "base_search_fuzzy"],
     "license": "AGPL-3",
-    'installable': True,
+    'installable': False,
 }

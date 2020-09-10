@@ -13,7 +13,7 @@
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
-    "installable": True,
+    "installable": False,
     "pre_init_hook": "pre_init_hook",
     "images": [
         "images/error-duplicated-email.png",
