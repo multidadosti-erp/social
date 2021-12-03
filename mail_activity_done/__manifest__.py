@@ -14,8 +14,8 @@
         'views/templates.xml',
         'views/mail_activity_views.xml',
     ],
+    'installable': True,
     "pre_init_hook": "pre_init_hook",
     "post_load": "post_load_hook",
     'uninstall_hook': 'uninstall_hook',
-    'installable': False,
 }

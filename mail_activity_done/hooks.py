@@ -14,17 +14,31 @@ def pre_init_hook(cr):
     WHERE table_name='mail_activity' AND
     column_name='done'""")
     if not cr.fetchone():
+        # Criando Campo
         cr.execute(
             """
             ALTER TABLE mail_activity ADD COLUMN done boolean;
             """)
+        # Populando Valor Default para DONE
+        cr.execute(
+            """
+            UPDATE mail_activity SET done = False
+            """
+        )
 
-    cr.execute(
-        """
-        UPDATE mail_activity
-        SET done = False
-        """
-    )
+    # Verificando se o Campo STATUS está criado
+    # para Ajustar o DONE de Acordo com o STATUS
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='mail_activity' AND
+    column_name='status'""")
+    if cr.fetchone():
+        cr.execute(
+            """
+            UPDATE mail_activity SET done = True
+            WHERE status in ('canceled', 'completed')
+            """
+        )
 
 
 def post_load_hook():
