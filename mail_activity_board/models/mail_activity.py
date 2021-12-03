@@ -10,9 +10,11 @@ class MailActivity(models.Model):
     res_model_id_name = fields.Char(
         related='res_model_id.name', string="Origin",
         readonly=True)
-    duration = fields.Float(
+    calendar_event_id_duration = fields.Float(
+        string='Calendar Event Duration',
         related='calendar_event_id.duration', readonly=True)
     calendar_event_id_start = fields.Datetime(
+        string='Calendar Event Start',
         related='calendar_event_id.start', readonly=True)
     calendar_event_id_partner_ids = fields.Many2many(
         related='calendar_event_id.partner_ids',

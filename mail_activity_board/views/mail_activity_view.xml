@@ -31,8 +31,8 @@
                                    attrs="{'invisible': [('activity_category', '=', 'meeting')]}"/>
                             <field name="calendar_event_id_start" string="Start meeting"
                                    attrs="{'invisible': [('calendar_event_id','=', False)]}"/>
-                            <field name="duration" widget="float_time"
-                                   attrs="{'invisible': ['|',('duration', '=', False),
+                            <field name="calendar_event_id_duration" widget="float_time"
+                                   attrs="{'invisible': ['|',('calendar_event_id_duration', '=', False),
                                    ('calendar_event_id','=', False)]}"/>
                             <field name="user_id" options="{'no_open': True}"/>
 
