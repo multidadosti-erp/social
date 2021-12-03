@@ -34,19 +34,16 @@ class TestMailActivityBoardMethods(TransactionCase):
         ActivityType = self.env['mail.activity.type']
         self.activity1 = ActivityType.create({
             'name': 'Initial Contact',
-            'days': 5,
             'summary': 'ACT 1 : Presentation, barbecue, ... ',
             'res_model_id': partner_model_id,
         })
         self.activity2 = ActivityType.create({
             'name': 'Call for Demo',
-            'days': 6,
             'summary': 'ACT 2 : I want to show you my ERP !',
             'res_model_id': partner_model_id,
         })
         self.activity3 = ActivityType.create({
             'name': 'Celebrate the sale',
-            'days': 3,
             'summary': 'ACT 3 : '
                        'Beers for everyone because I am a good salesman !',
             'res_model_id': partner_model_id,
