@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-03 12:50+0000\n"
+"PO-Revision-Date: 2021-12-03 12:50+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,27 +18,27 @@ msgstr ""
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
 msgid "<i class=\"fa fa-check\" role=\"img\" aria-label=\"Mark as Done\" title=\"Mark as Done\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-check\" role=\"img\" aria-label=\"Marcar como Concluído\" title=\"Marcar como Concluído\"/>"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
 msgid "<i class=\"fa fa-times\" role=\"img\" aria-label=\"Cancel\" title=\"Cancel\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-times\" role=\"img\" aria-label=\"Cancelar\" title=\"Cancelar\"/>"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
 msgid "<i class=\"fa fa-undo\" role=\"img\" aria-label=\"Done &amp; Schedule Next\" title=\"Done &amp; Schedule Next\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-undo\" role=\"img\" aria-label=\"Feita &amp; Agendar Próxima\" title=\"Feita &amp; Agendar Próxima\"/>"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Act. next 6 months"
-msgstr ""
+msgstr "Ativ. próx. 6 meses"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Act. next month"
-msgstr ""
+msgstr "Ativ. próx. mês"
 
 #. module: mail_activity_board
 #. openerp-web
@@ -45,91 +47,90 @@ msgstr ""
 #: model:ir.ui.menu,name:mail_activity_board.board_menu_activities
 #, python-format
 msgid "Activities"
-msgstr ""
+msgstr "Atividades"
 
 #. module: mail_activity_board
 #: model:ir.model,name:mail_activity_board.model_mail_activity
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Activity"
-msgstr ""
+msgstr "Atividade"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Activity Form"
-msgstr ""
+msgstr "Formulário de Atividade"
 
 #. module: mail_activity_board
 #: model:ir.model,name:mail_activity_board.model_mail_activity_mixin
 msgid "Activity Mixin"
-msgstr ""
+msgstr "Atividade Mixin"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_partner_ids
 msgid "Attendees"
-msgstr ""
+msgstr "Participantes"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__duration
 msgid "Duration"
-msgstr ""
+msgstr "Duração"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Log a note..."
-msgstr ""
+msgstr "Registrar uma nota interna..."
 
 #. module: mail_activity_board
 #. openerp-web
 #: code:addons/mail_activity_board/static/src/xml/systray.xml:7
 #, python-format
 msgid "Open All"
-msgstr ""
+msgstr "Abrir Todas"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__res_model_id_name
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Origin"
-msgstr ""
+msgstr "Origem"
 
 #. module: mail_activity_board
 #. openerp-web
 #: code:addons/mail_activity_board/static/src/xml/inherit_chatter.xml:7
 #, python-format
 msgid "See activities list"
-msgstr ""
+msgstr "Ver lista de atividades"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Show activities scheduled for next 6 months."
-msgstr ""
+msgstr "Mostrar atividades agendadas para os próximos 6 meses."
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Show activities scheduled for next month."
-msgstr ""
+msgstr "Mostrar atividades agendadas para o próximo mês."
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_start
 msgid "Start"
-msgstr ""
+msgstr "Iniciar"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,help:mail_activity_board.field_mail_activity__calendar_event_id_start
 msgid "Start date of an event, without time for full days events"
-msgstr ""
+msgstr "Data inicial de um evento, sem tempo para eventos de dias inteiros"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Start meeting"
-msgstr ""
+msgstr "Iniciar Reunião"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "User"
-msgstr ""
+msgstr "Usuário"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "e.g. Discuss proposal"
-msgstr ""
-
+msgstr "por exemplo, Discutir proposta"
