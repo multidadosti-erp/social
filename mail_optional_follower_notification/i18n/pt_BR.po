@@ -27,11 +27,15 @@ msgid ""
 "access the notification directly from the document (if they are allowed to)</"
 "span>"
 msgstr ""
+"<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" style="
+"\"color: red;\"> - Aviso: os seguidores não serão notificados, mas podem "
+"acessar a notificação diretamente do documento (se tiverem permissão).</"
+"span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_followers
 msgid "Document Followers"
-msgstr ""
+msgstr "Seguidores de documentos"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
@@ -42,10 +46,4 @@ msgstr "Assistente de Composição de Email"
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_account_invoice_send__notify_followers
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
 msgid "Notify Followers"
-msgstr ""
-
-#~ msgid "Message"
-#~ msgstr "Mensagem"
-
-#~ msgid "Partner"
-#~ msgstr "Parceiro"
+msgstr "Notificar eguidores"
