@@ -42,3 +42,9 @@ class MailActivityMixin(models.AbstractModel):
             [list]: Ids das Atividades por State
         """
         return self.activity_ids.filtered(lambda x: x.done == False).mapped('state')
+
+    def _search_activity_date_deadline(self, operator, operand, done_only=True):
+        res = super(MailActivityMixin, self)._search_activity_date_deadline(operator, operand)
+        if done_only:
+            res.append(('activity_ids.done', '=', False))
+        return res
