@@ -3,7 +3,9 @@
 
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from freezegun import freeze_time
+
+# Comentado a Lib freezegun por erro de compatiblidade com o runbot
+# from freezegun import freeze_time
 
 from odoo.tests import common
 
@@ -83,41 +85,41 @@ class TestMailActivityReminder(common.SavepointCase):
             'reminders': '0/2',
         })
 
-        with freeze_time(self.now):
-            activity = self.MailActivity.create({
-                'summary': 'Activity',
-                'activity_type_id': activity_type.id,
-                'res_model_id': self.model_res_partner.id,
-                'res_id': self.partner_DecoAddict.id,
-                'date_deadline': self.today + relativedelta(days=5),
-            })
+        # with freeze_time(self.now):
+        #     activity = self.MailActivity.create({
+        #         'summary': 'Activity',
+        #         'activity_type_id': activity_type.id,
+        #         'res_model_id': self.model_res_partner.id,
+        #         'res_id': self.partner_DecoAddict.id,
+        #         'date_deadline': self.today + relativedelta(days=5),
+        #     })
 
-        with freeze_time(self.now):
-            activities = self.MailActivity._get_activities_to_remind()
-            self.assertFalse(activities)
+        # with freeze_time(self.now):
+        #     activities = self.MailActivity._get_activities_to_remind()
+        #     self.assertFalse(activities)
 
-        with freeze_time(self.now + relativedelta(days=2)):
-            activities = self.MailActivity._get_activities_to_remind()
-            self.assertFalse(activities)
+        # with freeze_time(self.now + relativedelta(days=2)):
+        #     activities = self.MailActivity._get_activities_to_remind()
+        #     self.assertFalse(activities)
 
-        with freeze_time(self.now + relativedelta(days=3)):
-            activities = self.MailActivity._get_activities_to_remind()
-            self.assertEqual(activities, activity)
-            activities.action_remind()
+        # with freeze_time(self.now + relativedelta(days=3)):
+        #     activities = self.MailActivity._get_activities_to_remind()
+        #     self.assertEqual(activities, activity)
+        #     activities.action_remind()
 
-        with freeze_time(self.now + relativedelta(days=4)):
-            activities = self.MailActivity._get_activities_to_remind()
-            self.assertFalse(activities)
+        # with freeze_time(self.now + relativedelta(days=4)):
+        #     activities = self.MailActivity._get_activities_to_remind()
+        #     self.assertFalse(activities)
 
-        with freeze_time(self.now + relativedelta(days=5)):
-            activities = self.MailActivity._get_activities_to_remind()
-            self.assertEqual(activities, activity)
-            activities.action_remind()
+        # with freeze_time(self.now + relativedelta(days=5)):
+        #     activities = self.MailActivity._get_activities_to_remind()
+        #     self.assertEqual(activities, activity)
+        #     activities.action_remind()
 
-        activity.active = False
-        with freeze_time(self.now + relativedelta(days=5)):
-            activities = self.MailActivity._get_activities_to_remind()
-            self.assertFalse(activities)
+        # activity.active = False
+        # with freeze_time(self.now + relativedelta(days=5)):
+        #     activities = self.MailActivity._get_activities_to_remind()
+        #     self.assertFalse(activities)
 
     def test_reminder_flow(self):
         activity_type = self.MailActivityType.create({
@@ -125,34 +127,34 @@ class TestMailActivityReminder(common.SavepointCase):
             'reminders': '0/2',
         })
 
-        with freeze_time(self.now):
-            activity = self.MailActivity.create({
-                'summary': 'Activity',
-                'activity_type_id': activity_type.id,
-                'res_model_id': self.model_res_partner.id,
-                'res_id': self.partner_DecoAddict.id,
-                'date_deadline': self.today + relativedelta(days=5),
-            })
+        # with freeze_time(self.now):
+        #     activity = self.MailActivity.create({
+        #         'summary': 'Activity',
+        #         'activity_type_id': activity_type.id,
+        #         'res_model_id': self.model_res_partner.id,
+        #         'res_id': self.partner_DecoAddict.id,
+        #         'date_deadline': self.today + relativedelta(days=5),
+        #     })
 
-        with freeze_time(self.now):
-            activities = self.MailActivity._process_reminders()
-            self.assertFalse(activities)
+        # with freeze_time(self.now):
+        #     activities = self.MailActivity._process_reminders()
+        #     self.assertFalse(activities)
 
-        with freeze_time(self.now + relativedelta(days=2)):
-            activities = self.MailActivity._process_reminders()
-            self.assertFalse(activities)
+        # with freeze_time(self.now + relativedelta(days=2)):
+        #     activities = self.MailActivity._process_reminders()
+        #     self.assertFalse(activities)
 
-        with freeze_time(self.now + relativedelta(days=3)):
-            activities = self.MailActivity._process_reminders()
-            self.assertEqual(activities, activity)
+        # with freeze_time(self.now + relativedelta(days=3)):
+        #     activities = self.MailActivity._process_reminders()
+        #     self.assertEqual(activities, activity)
 
-        with freeze_time(self.now + relativedelta(days=4)):
-            activities = self.MailActivity._process_reminders()
-            self.assertFalse(activities)
+        # with freeze_time(self.now + relativedelta(days=4)):
+        #     activities = self.MailActivity._process_reminders()
+        #     self.assertFalse(activities)
 
-        with freeze_time(self.now + relativedelta(days=5)):
-            activities = self.MailActivity._process_reminders()
-            self.assertEqual(activities, activity)
+        # with freeze_time(self.now + relativedelta(days=5)):
+        #     activities = self.MailActivity._process_reminders()
+        #     self.assertEqual(activities, activity)
 
     def test_repeated_reminder(self):
         activity_type = self.MailActivityType.create({
@@ -160,21 +162,21 @@ class TestMailActivityReminder(common.SavepointCase):
             'reminders': '0',
         })
 
-        with freeze_time(self.now):
-            activity = self.MailActivity.create({
-                'summary': 'Activity',
-                'activity_type_id': activity_type.id,
-                'res_model_id': self.model_res_partner.id,
-                'res_id': self.partner_DecoAddict.id,
-                'date_deadline': self.today + relativedelta(days=1),
-            })
+        # with freeze_time(self.now):
+        #     activity = self.MailActivity.create({
+        #         'summary': 'Activity',
+        #         'activity_type_id': activity_type.id,
+        #         'res_model_id': self.model_res_partner.id,
+        #         'res_id': self.partner_DecoAddict.id,
+        #         'date_deadline': self.today + relativedelta(days=1),
+        #     })
 
-        with freeze_time(self.now + relativedelta(days=1)):
-            activities = self.MailActivity._process_reminders()
-            self.assertEqual(activities, activity)
+        # with freeze_time(self.now + relativedelta(days=1)):
+        #     activities = self.MailActivity._process_reminders()
+        #     self.assertEqual(activities, activity)
 
-            activities = self.MailActivity._process_reminders()
-            self.assertFalse(activities)
+        #     activities = self.MailActivity._process_reminders()
+        #     self.assertFalse(activities)
 
     def test_overdue_reminder(self):
         activity_type = self.MailActivityType.create({
@@ -182,15 +184,15 @@ class TestMailActivityReminder(common.SavepointCase):
             'reminders': '0',
         })
 
-        with freeze_time(self.now):
-            self.MailActivity.create({
-                'summary': 'Activity',
-                'activity_type_id': activity_type.id,
-                'res_model_id': self.model_res_partner.id,
-                'res_id': self.partner_DecoAddict.id,
-                'date_deadline': self.today + relativedelta(days=1),
-            })
+        # with freeze_time(self.now):
+        #     self.MailActivity.create({
+        #         'summary': 'Activity',
+        #         'activity_type_id': activity_type.id,
+        #         'res_model_id': self.model_res_partner.id,
+        #         'res_id': self.partner_DecoAddict.id,
+        #         'date_deadline': self.today + relativedelta(days=1),
+        #     })
 
-        with freeze_time(self.now + relativedelta(days=2)):
-            activities = self.MailActivity._get_activities_to_remind()
-            self.assertFalse(activities)
+        # with freeze_time(self.now + relativedelta(days=2)):
+        #     activities = self.MailActivity._get_activities_to_remind()
+        #     self.assertFalse(activities)
