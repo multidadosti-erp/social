@@ -16,6 +16,7 @@ class ResUsers(models.Model):
     def systray_get_activities(self):
         if not self._context.get('team_activities', False):
             return super().systray_get_activities()
+
         query = """SELECT m.id, count(*), act.res_model as model,
                                 CASE
                                     WHEN %(today)s::date -
@@ -32,6 +33,7 @@ class ResUsers(models.Model):
                                 FROM mail_activity_team_users_rel
                                 WHERE res_users_id = %(user_id)s
                             )
+                                AND act.done = False
                             GROUP BY m.id, states, act.res_model, act.user_id;
                             """
         user = self.env.uid
@@ -56,15 +58,12 @@ class ResUsers(models.Model):
                     'total_count': 0, 'today_count': 0, 'overdue_count': 0,
                     'planned_count': 0,
                 }
+
             user_activities[activity['model']][
                 '%s_count' % activity['states']] += activity['count']
-            if activity['states'] in ('today', 'overdue'):
+
+            if activity['states'] in ('today', 'overdue') and activity['user_id'] == user:
                 user_activities[activity['model']]['total_count'] += activity[
                     'count']
-            if activity['user_id'] == user and \
-                    activity['states'] in ('today', 'overdue'):
-                user_activities[
-                    activity['model']
-                ]['total_count'] -= activity['count']
 
         return list(user_activities.values())

@@ -175,4 +175,4 @@ class TestMailActivityTeam(SavepointCase):
         res = self.env['res.users'].sudo(self.employee.id).with_context(
             {'team_activities': True}
         ).systray_get_activities()
-        self.assertEqual(res[0]['total_count'], 0)
+        self.assertEqual(res[0]['total_count'], 2)

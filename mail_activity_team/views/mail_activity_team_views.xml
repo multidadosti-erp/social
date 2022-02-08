@@ -92,7 +92,7 @@ Menus
     <menuitem
             id="menu_mail_activity_team"
             name="Activity Teams"
-            parent="base.menu_email"
+            parent="base.menu_users"
             action="mail_activity_team_action"/>
 
 </odoo>

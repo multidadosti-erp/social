@@ -9,9 +9,10 @@
     'website': 'https://github.com/OCA/social',
     'author': 'Eficent, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
-    'installable': False,
+    'installable': True,
     'depends': [
         'mail_activity_board',
+        'mail_activity_done',
     ],
     'data': [
         'views/calendar_event.xml',
