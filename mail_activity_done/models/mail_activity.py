@@ -42,3 +42,18 @@ class MailActivityMixin(models.AbstractModel):
             [list]: Ids das Atividades por State
         """
         return self.activity_ids.filtered(lambda x: x.done == False).mapped('state')
+
+    def _search_activity_date_deadline(self, operator, operand):
+        """ Atualiza método search, para considerar apenas atividades que
+        ainda não foram concluídas.
+
+        Args:
+            operator (str): tipo de operador comparativo
+            operand (any): qualquer valor que está sendo comparado
+
+        Returns:
+            list: domain do search
+        """
+        res = super(MailActivityMixin, self)._search_activity_date_deadline(operator, operand)
+        res.append(('activity_ids.done', '=', False))
+        return res
