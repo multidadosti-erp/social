@@ -41,7 +41,9 @@ class MailActivityMixin(models.AbstractModel):
         Returns:
             [list]: Ids das Atividades por State
         """
-        return self.activity_ids.filtered(lambda x: x.done == False).mapped('state')
+        return self.activity_ids.filtered(
+                lambda x: not x.done and x.status == 'active'
+            ).mapped('state')
 
     def _search_activity_date_deadline(self, operator, operand):
         """ Atualiza método search, para considerar apenas atividades que
