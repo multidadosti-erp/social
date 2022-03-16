@@ -45,6 +45,19 @@ class MailActivityMixin(models.AbstractModel):
                 lambda x: not x.done and x.status == 'active'
             ).mapped('state')
 
+    def _get_activity_where_statement(self):
+        """ Adiciona condição em cláusula where de sql utilizado em
+        função do core para obter atividades atrasadas. Adiciona as
+        condições para pegar apenas atividades que não foram concluídas
+        (done = False) e atividades que estão ativas (status = 'active').
+
+        Returns:
+            str: Condições do WHERE executado na tabela 'mail.activity'
+        """
+        res = super(MailActivityMixin, self)._get_activity_where_statement()
+        res += "AND done = False AND status = 'active' "
+        return res
+
     def _search_activity_date_deadline(self, operator, operand):
         """ Atualiza método search, para considerar apenas atividades que
         ainda não foram concluídas.
