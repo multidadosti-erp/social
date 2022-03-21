@@ -21,8 +21,9 @@ class ResUsers(models.Model):
                         END AS states
                     FROM mail_activity AS act
                     JOIN ir_model AS m ON act.res_model_id = m.id
-                    WHERE user_id = %(user_id)s
-                    AND act.done = False
+                    WHERE act.user_id = %(user_id)s
+                      AND act.done = False
+                      AND act.status = 'active'
                     GROUP BY m.id, states, act.res_model;
                     """
         self.env.cr.execute(query, {
