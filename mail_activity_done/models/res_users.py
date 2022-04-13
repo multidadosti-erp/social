@@ -12,20 +12,21 @@ class ResUsers(models.Model):
         # we should perhaps ask Odoo to add a hook here.
         query = """SELECT m.id, count(*), act.res_model as model,
                         CASE
-                            WHEN %(today)s::date -
-                            act.date_deadline::date = 0 Then 'today'
-                            WHEN %(today)s::date -
-                            act.date_deadline::date > 0 Then 'overdue'
-                            WHEN %(today)s::date -
-                            act.date_deadline::date < 0 Then 'planned'
+                            WHEN %(today)s::date - act.date_deadline::date = 0 Then 'today'
+                            WHEN %(today)s::date - act.date_deadline::date > 0 Then 'overdue'
+                            WHEN %(today)s::date - act.date_deadline::date < 0 Then 'planned'
                         END AS states
                     FROM mail_activity AS act
-                    JOIN ir_model AS m ON act.res_model_id = m.id
+                        JOIN ir_model AS m ON act.res_model_id = m.id
+                        JOIN mail_activity_type mat on act.activity_type_id = mat.id
+
                     WHERE act.user_id = %(user_id)s
                       AND act.done = False
                       AND act.status = 'active'
+                      AND mat.show_on_plan_activities = True
+
                     GROUP BY m.id, states, act.res_model;
-                    """
+                """
         self.env.cr.execute(query, {
             'today': fields.Date.context_today(self),
             'user_id': self.env.uid,

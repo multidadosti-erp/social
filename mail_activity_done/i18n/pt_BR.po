@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-03 12:48+0000\n"
-"PO-Revision-Date: 2021-12-03 12:48+0000\n"
+"POT-Creation-Date: 2022-04-13 19:23+0000\n"
+"PO-Revision-Date: 2022-04-13 19:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,30 +23,17 @@ msgid "%d days overdue"
 msgstr "%d dias de atraso"
 
 #. module: mail_activity_done
-#: code:addons/mail_activity_done/models/mail_activity.py:18
+#: code:addons/mail_activity_done/models/mail_activity.py:29
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__active
 #, python-format
 msgid "Active"
 msgstr "Ativo"
 
 #. module: mail_activity_done
-#: model:ir.model.fields,field_description:mail_activity_done.field_account_invoice__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_crm_lead__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_formio_builder__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_formio_form__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_hr_employee__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_mixin__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_material_purchase_requisition__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_note_note__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_product_product__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_product_template__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_project_task__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_purchase_order__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_partner__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_users__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_sale_order__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_stock_picking__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_stock_production_lot__activity_ids
 msgid "Activities"
 msgstr "Atividades"
 
@@ -61,19 +48,19 @@ msgid "Activity Mixin"
 msgstr "Atividade Mixin"
 
 #. module: mail_activity_done
+#: model:ir.model,name:mail_activity_done.model_mail_activity_type
+msgid "Activity Type"
+msgstr "Tipo de Atividade"
+
+#. module: mail_activity_done
 #: selection:mail.activity,status:0
 msgid "Ativo"
 msgstr ""
 
 #. module: mail_activity_done
 #: selection:mail.activity,status:0
-msgid "Attended"
-msgstr "Compareceu"
-
-#. module: mail_activity_done
-#: selection:mail.activity,status:0
 msgid "Canceled"
-msgstr "Cancelado"
+msgstr "Cancelada"
 
 #. module: mail_activity_done
 #: selection:mail.activity,status:0
@@ -125,9 +112,10 @@ msgid "Planned"
 msgstr "Planejada"
 
 #. module: mail_activity_done
-#: selection:mail.activity,status:0
-msgid "Started Appointment"
-msgstr "Iniciou Consulta"
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__type_id_show_on_plan_activities
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_type__show_on_plan_activities
+msgid "Show on Plan Activities"
+msgstr "Mostrar em Planejados"
 
 #. module: mail_activity_done
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__state
@@ -165,4 +153,3 @@ msgstr "Usuários"
 #, python-format
 msgid "Yesterday"
 msgstr "Ontem"
-

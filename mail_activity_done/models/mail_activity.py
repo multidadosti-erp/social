@@ -7,16 +7,30 @@ class MailActivity(models.Model):
 
     _inherit = 'mail.activity'
 
-    active = fields.Boolean(default=True)
-    done = fields.Boolean(default=False)
-    state = fields.Selection(selection_add=[
-        ('done', 'Done')], compute='_compute_state')
+    active = fields.Boolean(
+        default=True)
+
+    done = fields.Boolean(
+        default=False)
+
+    state = fields.Selection(
+        selection_add=[
+            ('done', 'Done')
+        ],
+        compute='_compute_state')
+
     date_done = fields.Date(
-        'Completed Date', index=True, readonly=True,
+        'Completed Date',
+        index=True,
+        readonly=True,
     )
+
     status = fields.Selection(
         selection=[('active', _('Active')),],
         default='active')
+
+    type_id_show_on_plan_activities = fields.Boolean(
+        related='activity_type_id.show_on_plan_activities')
 
     @api.depends('date_deadline', 'done')
     def _compute_state(self):
@@ -29,10 +43,14 @@ class MailActivityMixin(models.AbstractModel):
 
     _inherit = 'mail.activity.mixin'
 
-    # comentado para não conflitar com o modulo: schedule_activity_app
-    # activity_ids = fields.One2many(
-    #     domain=lambda self: [('res_model', '=', self._name),
-    #                          ('active', '=', True)])
+    activity_ids = fields.One2many(
+        domain=lambda self: [
+            ('res_model', '=', self._name),
+            ('active', '=', True),
+            ('done', '=', False),
+            ('type_id_show_on_plan_activities', '=', True)
+        ]
+    )
 
     def get_activities_states(self):
         """Sobrescreve método do Core para adicionar
@@ -58,18 +76,17 @@ class MailActivityMixin(models.AbstractModel):
         res += "AND done = False AND status = 'active' "
         return res
 
-    # comentado para não conflitar com o modulo: schedule_activity_app
-    # def _search_activity_date_deadline(self, operator, operand):
-    #     """ Atualiza método search, para considerar apenas atividades que
-    #     ainda não foram concluídas.
+    def _search_activity_date_deadline(self, operator, operand):
+        """ Atualiza método search, para considerar apenas atividades que
+        ainda não foram concluídas.
 
-    #     Args:
-    #         operator (str): tipo de operador comparativo
-    #         operand (any): qualquer valor que está sendo comparado
+        Args:
+            operator (str): tipo de operador comparativo
+            operand (any): qualquer valor que está sendo comparado
 
-    #     Returns:
-    #         list: domain do search
-    #     """
-    #     res = super(MailActivityMixin, self)._search_activity_date_deadline(operator, operand)
-    #     res.append(('activity_ids.done', '=', False))
-    #     return res
+        Returns:
+            list: domain do search
+        """
+        res = super(MailActivityMixin, self)._search_activity_date_deadline(operator, operand)
+        res.append(('activity_ids.done', '=', False))
+        return res
