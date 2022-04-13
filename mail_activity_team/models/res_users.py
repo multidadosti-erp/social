@@ -18,24 +18,28 @@ class ResUsers(models.Model):
             return super().systray_get_activities()
 
         query = """SELECT m.id, count(*), act.res_model as model,
-                                CASE
-                                    WHEN %(today)s::date -
-                                    act.date_deadline::date = 0 Then 'today'
-                                    WHEN %(today)s::date -
-                                    act.date_deadline::date > 0 Then 'overdue'
-                                    WHEN %(today)s::date -
-                                    act.date_deadline::date < 0 Then 'planned'
-                                END AS states, act.user_id as user_id
-                            FROM mail_activity AS act
-                            JOIN ir_model AS m ON act.res_model_id = m.id
-                            WHERE team_id in (
-                                SELECT mail_activity_team_id
-                                FROM mail_activity_team_users_rel
-                                WHERE res_users_id = %(user_id)s
-                            )
-                                AND act.done = False
-                            GROUP BY m.id, states, act.res_model, act.user_id;
-                            """
+                          CASE
+                            WHEN %(today)s::date - act.date_deadline::date = 0 Then 'today'
+                            WHEN %(today)s::date - act.date_deadline::date > 0 Then 'overdue'
+                            WHEN %(today)s::date - act.date_deadline::date < 0 Then 'planned'
+                          END AS states,
+                          act.user_id as user_id
+
+                   FROM mail_activity AS act
+                       JOIN ir_model AS m ON act.res_model_id = m.id
+                       JOIN mail_activity_type mat on act.activity_type_id = mat.id
+
+                   WHERE team_id in
+                       ( SELECT mail_activity_team_id
+                           FROM mail_activity_team_users_rel
+                           WHERE res_users_id = %(user_id)s
+                       )
+                       AND act.done = False
+                       AND act.status = 'active'
+                       AND mat.show_on_plan_activities = True
+
+                   GROUP BY m.id, states, act.res_model, act.user_id;
+                """
         user = self.env.uid
         self.env.cr.execute(query, {
             'today': fields.Date.context_today(self),
