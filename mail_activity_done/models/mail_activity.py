@@ -29,10 +29,10 @@ class MailActivityMixin(models.AbstractModel):
 
     _inherit = 'mail.activity.mixin'
 
-    activity_ids = fields.One2many(
-        domain=lambda self: [('res_model', '=', self._name),
-                             ('active', '=', True)])
-
+    # comentado para não conflitar com o modulo: schedule_activity_app
+    # activity_ids = fields.One2many(
+    #     domain=lambda self: [('res_model', '=', self._name),
+    #                          ('active', '=', True)])
 
     def get_activities_states(self):
         """Sobrescreve método do Core para adicionar
@@ -58,17 +58,18 @@ class MailActivityMixin(models.AbstractModel):
         res += "AND done = False AND status = 'active' "
         return res
 
-    def _search_activity_date_deadline(self, operator, operand):
-        """ Atualiza método search, para considerar apenas atividades que
-        ainda não foram concluídas.
+    # comentado para não conflitar com o modulo: schedule_activity_app
+    # def _search_activity_date_deadline(self, operator, operand):
+    #     """ Atualiza método search, para considerar apenas atividades que
+    #     ainda não foram concluídas.
 
-        Args:
-            operator (str): tipo de operador comparativo
-            operand (any): qualquer valor que está sendo comparado
+    #     Args:
+    #         operator (str): tipo de operador comparativo
+    #         operand (any): qualquer valor que está sendo comparado
 
-        Returns:
-            list: domain do search
-        """
-        res = super(MailActivityMixin, self)._search_activity_date_deadline(operator, operand)
-        res.append(('activity_ids.done', '=', False))
-        return res
+    #     Returns:
+    #         list: domain do search
+    #     """
+    #     res = super(MailActivityMixin, self)._search_activity_date_deadline(operator, operand)
+    #     res.append(('activity_ids.done', '=', False))
+    #     return res
