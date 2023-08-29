@@ -5,15 +5,15 @@
 -->
 
     <!-- FORM VIEW -->
-    <record id="mail_activity_view_form_board" model="ir.ui.view">
-        <field name="name">mail.activity.boards.view.form</field>
+    <record id="mail_activity_view_form_popup" model="ir.ui.view">
+        <field name="name">mail.activity.form.popup.board</field>
         <field name="model">mail.activity</field>
-        <field name="inherit_id" ref="mail_activity_board.mail_activity_view_form_board"/>
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup"/>
         <field name="arch" type="xml">
-            <field name="activity_type_id" position="before">
+            <xpath expr="//field[@name='activity_type_id']" position="before">
                 <field name="partner_id" readonly="True"/>
                 <field name="commercial_partner_id"/>
-            </field>
+            </xpath>
         </field>
     </record>
 
