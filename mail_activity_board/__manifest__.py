@@ -13,6 +13,7 @@
     'depends': [
         'calendar',
         'board',
+        'mail_activity_done',
     ],
     'data': [
         'views/templates.xml',

@@ -7,15 +7,24 @@ from odoo import api, models, fields, SUPERUSER_ID
 class MailActivity(models.Model):
     _inherit = "mail.activity"
 
+    color = fields.Integer(
+        string='Color Index')
+
     res_model_id_name = fields.Char(
-        related='res_model_id.name', string="Origin",
+        related='res_model_id.name',
+        string="Origin",
         readonly=True)
+
     calendar_event_id_duration = fields.Float(
-        string='Calendar Event Duration',
-        related='calendar_event_id.duration', readonly=True)
+        string='Meeting Duration',
+        related='calendar_event_id.duration',
+        readonly=True)
+
     calendar_event_id_start = fields.Datetime(
-        string='Calendar Event Start',
-        related='calendar_event_id.start', readonly=True)
+        string='Meeting Start',
+        related='calendar_event_id.start',
+        readonly=True)
+
     calendar_event_id_partner_ids = fields.Many2many(
         related='calendar_event_id.partner_ids',
         readonly=True)

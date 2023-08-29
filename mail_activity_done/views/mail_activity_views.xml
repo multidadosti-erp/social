@@ -10,9 +10,21 @@
         <field name="inherit_id" ref="mail.mail_activity_view_form_popup"/>
         <field name="priority">20</field>
         <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+            </xpath>
+            <xpath expr="//sheet/group" position="before">
+                <group>
+                    <field name="state" widget="statusbar"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='date_deadline']" position="attributes">
+                <attribute name="string">Activity Date</attribute>
+            </xpath>
             <field name="activity_type_id" position="after">
-                <field name="state"/>
-                <field name="date_done"/>
+                <field name="date_done" attrs="{'invisible': [('date_done', '=', False)]}"/>
             </field>
             <button name="action_done" position="attributes">
                 <attribute name="attrs">{'invisible':[('state', '=', 'done')]}</attribute>
