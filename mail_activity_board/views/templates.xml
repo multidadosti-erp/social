@@ -5,5 +5,8 @@
             <script type="text/javascript" src="/mail_activity_board/static/src/js/override_chatter.js"/>
             <script type="text/javascript" src="/mail_activity_board/static/src/js/systray.js"/>
         </xpath>
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/mail_activity_board/static/src/scss/activity_kanban.scss"/>
+        </xpath>
     </template>
 </odoo>

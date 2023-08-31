@@ -26,7 +26,11 @@ class MailActivity(models.Model):
     )
 
     status = fields.Selection(
-        selection=[('active', _('Active')),],
+        selection=[
+            ('active', 'Active'),
+            ('canceled', 'Canceled'),
+            ('completed', 'Completed'),
+        ],
         default='active')
 
     type_id_show_on_plan_activities = fields.Boolean(

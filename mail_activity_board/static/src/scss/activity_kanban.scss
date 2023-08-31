@@ -1,0 +1,48 @@
+.o_kanban_view.o_activity_kanban_view {
+
+    .o_kanban_record {
+        position: relative;
+        padding: 0;
+        display: flex;
+
+        .state-overdue {
+            color: #db0000,
+        }
+        .state-today {
+            color: #ffaa3f,
+        }
+        .state-planned {
+            color: #ffffff,
+        }
+        .state-done, .status-completed {
+            color: #60ff41,
+        }
+        .status-active {
+            color: #0043a8,
+        }
+        .status-canceled {
+            color: #575757,
+        }
+
+        .o_date_left {
+            flex: 1 1 25%;
+            text-align: center;
+            color: white;
+            background-color: $o-brand-primary;
+            padding: 8px;
+
+            .o_day {
+                font-size: 20px;
+            }
+        }
+        .o_right_content {
+            flex: 1 1 75%;
+            padding: 2px 2px 4px;
+            margin-left: 8px;
+
+            .oe_kanban_bottom_left {
+                width: min-content;
+            }
+        }
+    }
+}
