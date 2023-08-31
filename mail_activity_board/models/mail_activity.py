@@ -2,6 +2,8 @@
 # Copyright 2018 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, models, fields, SUPERUSER_ID
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 class MailActivity(models.Model):
@@ -25,9 +27,46 @@ class MailActivity(models.Model):
         related='calendar_event_id.start',
         readonly=True)
 
+    calendar_event_id_stop = fields.Datetime(
+        string='Meeting Stop',
+        related='calendar_event_id.stop',
+        readonly=True)
+
     calendar_event_id_partner_ids = fields.Many2many(
         related='calendar_event_id.partner_ids',
         readonly=True)
+
+    start = fields.Datetime(
+        index=True,
+        track_visibility='onchange') # Campos para Migrar no Calendar Event
+
+    stop = fields.Datetime(
+        index=True,
+        track_visibility='onchange') # Campos para Migrar no Calendar Event
+
+    duration = fields.Float() # Campos para Migrar no Calendar Event
+
+    location = fields.Char() # Campos para Migrar no Calendar Event
+
+    event_datetime_start = fields.Datetime( # Campos que devem ser related do calendar.event
+        string='Event Start Time')
+
+    event_datetime_stop = fields.Datetime( # Campos que devem ser related do calendar.event
+        string='Event Stop Time')
+
+    event_duration = fields.Float( # Campos que devem ser related do calendar.event
+        "Event Duration")
+
+    event_location = fields.Char( # Campos que devem ser related do calendar.event
+        "Event Location")
+
+    datetime_state = fields.Selection(
+        [('overdue', 'Overdue'),
+         ('today', 'Today'),
+         ('planned', 'Planned'),
+         ('done', 'Done'),],
+        string='Time State',
+        compute='_compute_datetime_state')
 
     @api.multi
     def open_origin(self):
@@ -116,3 +155,26 @@ class MailActivity(models.Model):
             # re-construct a list based on ids, because set didn't keep order
             id_list = [a_id for a_id in ids if a_id in final_ids]
             return id_list
+
+    def _compute_datetime_state(self):
+        """ Obtém o state baseado no horário de ínicio da
+        atividade, e nao somente no dia
+
+        Returns:
+            str: State do horario da atividade
+        """
+        for rec in self:
+            status = 'planned'
+            state = rec.state
+            if rec.start:
+                if state in ['overdue', 'done']:
+                    status = state
+                elif rec.state == 'today':
+                    now = datetime.now()
+                    if rec.start > now + relativedelta(hours=1):
+                        status = 'planned'
+                    elif rec.start >= now:
+                        status = 'today'
+                    else:
+                        status = 'overdue'
+            rec.datetime_state = status

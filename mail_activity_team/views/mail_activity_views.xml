@@ -28,11 +28,10 @@
          <field name="model">mail.activity</field>
          <field name="inherit_id" ref="mail_activity_board.mail_activity_view_kanban"/>
          <field name="arch" type="xml">
-             <field name="user_id" position="after">
-                 <field name="team_id"/>
-             </field>
-             <xpath expr="//div[hasclass('oe_kanban_content')]" position="inside">
-                 <br/>
+            <xpath expr="//kanban/field[@name='user_id']" position="after">
+                <field name="team_id"/>
+            </xpath>
+             <xpath expr="//div[@name='main-content']/div[last()]" position="after">
                  <div>
                      Team: <field name="team_id"/>
                  </div>
