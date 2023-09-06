@@ -166,14 +166,15 @@ class MailActivity(models.Model):
         for rec in self:
             status = 'planned'
             state = rec.state
-            if rec.start:
+            start = rec.start or rec.calendar_event_id_start
+            if start:
                 if state in ['overdue', 'done']:
                     status = state
                 elif rec.state == 'today':
                     now = datetime.now()
-                    if rec.start > now + relativedelta(hours=1):
+                    if start > now + relativedelta(hours=1):
                         status = 'planned'
-                    elif rec.start >= now:
+                    elif start >= now:
                         status = 'today'
                     else:
                         status = 'overdue'
