@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Resource: res.partner.category -->
+        <record id="activity_team_demo_1" model="mail.activity.team">
+            <field name="name">Activities Team 1 (Demo)</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="member_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base.user_demo')])]"/>
+        </record>
+    </data>
+</odoo>
