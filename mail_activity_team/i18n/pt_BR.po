@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 15:51+0000\n"
-"PO-Revision-Date: 2023-08-30 15:51+0000\n"
+"POT-Creation-Date: 2023-09-15 17:43+0000\n"
+"PO-Revision-Date: 2023-09-15 17:43+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__active
 msgid "Active"
 msgstr "Ativo"
+
+#. module: mail_activity_team
+#: model:mail.activity.team,name:mail_activity_team.activity_team_demo_1
+msgid "Activities Team 1 (Demo)"
+msgstr "Equipe de Atividades 1 (Demo)"
 
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_mail_activity
@@ -126,11 +131,6 @@ msgid "My Activities"
 msgstr "Minha Atividades"
 
 #. module: mail_activity_team
-#: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
-msgid "My Team Activities"
-msgstr "Atividades da Minha Equipe"
-
-#. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.view_calendar_event_search
 msgid "My Team Meetings"
 msgstr "Reuniões da Minha Equipe"
@@ -190,12 +190,6 @@ msgid "Team:"
 msgstr "Equipe:"
 
 #. module: mail_activity_team
-#: code:addons/mail_activity_team/models/mail_activity.py:74
-#, python-format
-msgid "The assigned user is not member of the team."
-msgstr "O utilizador atribuído não é membro da equipe."
-
-#. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__res_model_ids
 msgid "Used models"
 msgstr "Modelos usados"
@@ -206,11 +200,7 @@ msgid "Users"
 msgstr "Usuários"
 
 #. module: mail_activity_team
-#: model:ir.model.fields,field_description:mail_activity_team.field_crm_lead__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_mixin__activity_team_user_ids
-#: model:ir.model.fields,field_description:mail_activity_team.field_note_note__activity_team_user_ids
-#: model:ir.model.fields,field_description:mail_activity_team.field_queue_job__activity_team_user_ids
-#: model:ir.model.fields,field_description:mail_activity_team.field_queue_job_batch__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_partner__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_users__activity_team_user_ids
 msgid "test field"
