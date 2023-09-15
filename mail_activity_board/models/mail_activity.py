@@ -1,7 +1,7 @@
 # Copyright 2018 David Juaneda - <djuaneda@sdi.es>
 # Copyright 2018 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, models, fields, SUPERUSER_ID
+from odoo import _, api, models, fields, SUPERUSER_ID
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -67,6 +67,37 @@ class MailActivity(models.Model):
          ('done', 'Done'),],
         string='Time State',
         compute='_compute_datetime_state')
+
+    @api.onchange('start')
+    def _onchange_start(self):
+        """ Mantém o campo 'date_deadline' atualizado com o start
+        e o stop maior que o start.
+        """
+        start = self.start
+        if start:
+            self.date_deadline = start.date()
+            if self.stop and self.stop < start:
+                self.stop = start + relativedelta(hours=1)
+                return {
+                    'warning': {
+                        'title': _("Warning"),
+                        'message': _("Stop time must be greather than start time."),
+                    }
+                }
+
+    @api.onchange('stop')
+    def _onchange_stop(self):
+        """ Mantém stop maior que start
+        """
+        start, stop = self.start, self.stop
+        if (start and stop) and stop < start:
+            self.stop = start + relativedelta(hours=1)
+            return {
+                'warning': {
+                    'title': _("Warning"),
+                    'message': _("Stop time must be greather than start time."),
+                }
+            }
 
     @api.multi
     def open_origin(self):
@@ -179,3 +210,64 @@ class MailActivity(models.Model):
                     else:
                         status = 'overdue'
             rec.datetime_state = status
+
+    def get_calendar_event_vals(self):
+        """ Obtém os valores para a criação do evento de
+        calendário
+
+        Returns:
+            dict: Valores para a criação do evento
+        """
+        stop = self.stop
+        if not stop:
+            stop = self.start + relativedelta(hours=1)
+        return {
+            'user_id': self.user_id.id,
+            'start': self.start,
+            'stop': stop
+        }
+
+    @api.multi
+    def action_create_calendar_event(self):
+        """ Caso o campo start tenha sido populado na atividade,
+        ao abrir o calendário, o registro da reunião já terá sido
+        criado e seu form abrirá.
+
+        Returns:
+            dict: Valores da Action de Eventos do Calendário
+        """
+        res = super().action_create_calendar_event()
+
+        # Cria evento do calendário se o start for fornecido e abre
+        # o form dele direto caso tenha sido criado.
+        CalendarEvent = self.env['calendar.event'].with_context(res['context'])
+        if self.start:
+            try:
+                calendar_event = CalendarEvent.create(self.get_calendar_event_vals())
+            except:
+                calendar_event = False
+            if calendar_event:
+                res['res_id'] = calendar_event.id
+                res['view_mode'] = 'form,tree,calendar'
+                res['views'].reverse()
+
+        return res
+
+    def write(self, values):
+        """ Atualiza valores do start e stop do evento
+        do calendário
+
+        Args:
+            values (dict): valores de atualização da atividade
+
+        Returns:
+            bool: Resultado da atualização
+        """
+        res = super(MailActivity, self).write(values)
+        for rec in self:
+            if rec.calendar_event_id:
+                if 'start' in values:
+                    self.calendar_event_id.start = values['start']
+                if 'stop' in values:
+                    self.calendar_event_id.start = values['stop']
+        return res
