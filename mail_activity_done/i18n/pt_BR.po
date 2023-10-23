@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 15:42+0000\n"
-"PO-Revision-Date: 2023-08-30 15:42+0000\n"
+"POT-Creation-Date: 2023-10-23 15:34+0000\n"
+"PO-Revision-Date: 2023-10-23 15:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,13 +23,14 @@ msgid "%d days overdue"
 msgstr "%d dias de atraso"
 
 #. module: mail_activity_done
-#: code:addons/mail_activity_done/models/mail_activity.py:29
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__active
-#, python-format
+#: selection:mail.activity,status:0
 msgid "Active"
 msgstr "Ativo"
 
 #. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_cron_track__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_hr_employee__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_mixin__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_partner__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_users__activity_ids
@@ -58,13 +59,8 @@ msgstr "Tipo de Atividade"
 
 #. module: mail_activity_done
 #: selection:mail.activity,status:0
-msgid "Ativo"
-msgstr ""
-
-#. module: mail_activity_done
-#: selection:mail.activity,status:0
-msgid "Cancelada"
-msgstr ""
+msgid "Canceled"
+msgstr "Cancelada"
 
 #. module: mail_activity_done
 #: selection:mail.activity,status:0
