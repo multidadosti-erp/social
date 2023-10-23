@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 17:38+0000\n"
-"PO-Revision-Date: 2023-09-15 17:38+0000\n"
+"POT-Creation-Date: 2023-10-23 17:53+0000\n"
+"PO-Revision-Date: 2023-10-23 17:53+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -135,6 +135,11 @@ msgid "Meeting Start"
 msgstr "Início da Reunião"
 
 #. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_stop
+msgid "Meeting Stop"
+msgstr "Fim da Reunião"
+
+#. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_popup
 msgid "Observations"
 msgstr "Observações"
@@ -187,7 +192,7 @@ msgstr "Mostrar atividades agendadas para o próximo mês."
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__start
 msgid "Start"
-msgstr "Início"
+msgstr "Iniciar"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,help:mail_activity_board.field_mail_activity__calendar_event_id_start
@@ -232,4 +237,3 @@ msgstr "Usuário"
 #, python-format
 msgid "Warning"
 msgstr "Aviso"
-

@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-23 17:52+0000\n"
+"PO-Revision-Date: 2023-10-23 17:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -49,13 +51,7 @@ msgstr ""
 
 #. module: mail_activity_board
 #: model:ir.model,name:mail_activity_board.model_mail_activity
-#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Activity"
-msgstr ""
-
-#. module: mail_activity_board
-#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
-msgid "Activity Form"
 msgstr ""
 
 #. module: mail_activity_board
@@ -69,13 +65,83 @@ msgid "Attendees"
 msgstr ""
 
 #. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__color
+msgid "Color Index"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid "Delete"
+msgstr ""
+
+#. module: mail_activity_board
+#: selection:mail.activity,datetime_state:0
+msgid "Done"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid "Dropdown menu"
+msgstr ""
+
+#. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__duration
 msgid "Duration"
 msgstr ""
 
 #. module: mail_activity_board
-#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
-msgid "Log a note..."
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__event_duration
+msgid "Event Duration"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__event_location
+msgid "Event Location"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__event_datetime_start
+msgid "Event Start Time"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__event_datetime_stop
+msgid "Event Stop Time"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_popup
+msgid "Feedback"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__location
+msgid "Location"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_popup
+msgid "Meeting"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_duration
+msgid "Meeting Duration"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_start
+msgid "Meeting Start"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_stop
+msgid "Meeting Stop"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_popup
+msgid "Observations"
 msgstr ""
 
 #. module: mail_activity_board
@@ -89,6 +155,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__res_model_id_name
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Origin"
+msgstr ""
+
+#. module: mail_activity_board
+#: selection:mail.activity,datetime_state:0
+msgid "Overdue"
+msgstr ""
+
+#. module: mail_activity_board
+#: selection:mail.activity,datetime_state:0
+msgid "Planned"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_popup
+msgid "Save"
 msgstr ""
 
 #. module: mail_activity_board
@@ -109,7 +190,7 @@ msgid "Show activities scheduled for next month."
 msgstr ""
 
 #. module: mail_activity_board
-#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_start
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__start
 msgid "Start"
 msgstr ""
 
@@ -119,8 +200,30 @@ msgid "Start date of an event, without time for full days events"
 msgstr ""
 
 #. module: mail_activity_board
-#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
-msgid "Start meeting"
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__stop
+msgid "Stop"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,help:mail_activity_board.field_mail_activity__calendar_event_id_stop
+msgid "Stop date of an event, without time for full days events"
+msgstr ""
+
+#. module: mail_activity_board
+#: code:addons/mail_activity_board/models/mail_activity.py:84
+#: code:addons/mail_activity_board/models/mail_activity.py:98
+#, python-format
+msgid "Stop time must be greather than start time."
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__datetime_state
+msgid "Time State"
+msgstr ""
+
+#. module: mail_activity_board
+#: selection:mail.activity,datetime_state:0
+msgid "Today"
 msgstr ""
 
 #. module: mail_activity_board
@@ -129,7 +232,8 @@ msgid "User"
 msgstr ""
 
 #. module: mail_activity_board
-#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
-msgid "e.g. Discuss proposal"
+#: code:addons/mail_activity_board/models/mail_activity.py:83
+#: code:addons/mail_activity_board/models/mail_activity.py:97
+#, python-format
+msgid "Warning"
 msgstr ""
-
