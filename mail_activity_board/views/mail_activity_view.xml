@@ -49,12 +49,6 @@
             <xpath expr="//button[@name='action_close_dialog']" position="attributes">
                 <attribute name="string">Save</attribute>
             </xpath>
-            <xpath expr="//button[@name='action_done']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
-            <xpath expr="//button[@name='action_done_schedule_next']" position="attributes">
-                <attribute name="invisible">1</attribute>
-            </xpath>
         </field>
     </record>
 
