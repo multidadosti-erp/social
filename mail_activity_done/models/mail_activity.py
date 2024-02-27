@@ -8,16 +8,20 @@ class MailActivity(models.Model):
     _inherit = 'mail.activity'
 
     active = fields.Boolean(
-        default=True)
+        default=True
+    )
 
     done = fields.Boolean(
-        default=False)
+        default=False
+    )
 
     state = fields.Selection(
         selection_add=[
             ('done', 'Done')
         ],
-        compute='_compute_state')
+        store=True,
+        compute='_compute_state'
+    )
 
     date_done = fields.Date(
         'Completed Date',
@@ -31,10 +35,12 @@ class MailActivity(models.Model):
             ('canceled', 'Canceled'),
             ('completed', 'Completed'),
         ],
-        default='active')
+        default='active'
+    )
 
     type_id_show_on_plan_activities = fields.Boolean(
-        related='activity_type_id.show_on_plan_activities')
+        related='activity_type_id.show_on_plan_activities'
+    )
 
     @api.depends('date_deadline', 'done')
     def _compute_state(self):
