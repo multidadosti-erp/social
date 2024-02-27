@@ -22,6 +22,6 @@ class MailActivityType(models.Model):
     def _get_reminder_offsets(self):
         """Hook for extensions"""
         self.ensure_one()
-        if not self.reminders:
-            return []
-        return [int(x) for x in split(r'\D+', self.reminders) if x]
+        reminders = self.reminders or '0'
+
+        return [int(x) for x in split(r'\D+', reminders) if x]

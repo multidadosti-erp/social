@@ -39,7 +39,7 @@ class TestMailActivityReminder(common.SavepointCase):
         activity_type = self.MailActivityType.create({
             'name': 'Activity Type',
         })
-        self.assertEqual(activity_type._get_reminder_offsets(), [])
+        self.assertEqual(activity_type._get_reminder_offsets(), [0])
 
     def test_empty_reminders(self):
         activity_type = self.MailActivityType.create({
@@ -53,21 +53,21 @@ class TestMailActivityReminder(common.SavepointCase):
             'name': 'Activity Type',
             'reminders': '0 1_2/3.4t5',
         })
-        self.assertEqual(activity_type._get_reminder_offsets(), [
-            0, 1, 2, 3, 4, 5
-        ])
+        self.assertEqual(activity_type._get_reminder_offsets(), [0, 1, 2, 3, 4, 5])
 
     def test_first_notice_is_reminder(self):
         activity_type = self.MailActivityType.create({
             'name': 'Activity Type',
             'reminders': '0',
         })
+
         user = self.ResUsers.sudo().create({
             'name': 'User',
             'login': 'user',
             'email': 'user@example.com',
             'company_id': self.company_id.id,
         })
+
         activity = self.MailActivity.create({
             'summary': 'Activity',
             'activity_type_id': activity_type.id,
