@@ -39,7 +39,7 @@ class TestMailActivityReminder(common.SavepointCase):
         activity_type = self.MailActivityType.create({
             'name': 'Activity Type',
         })
-        self.assertEqual(activity_type._get_reminder_offsets(), [0])
+        self.assertEqual(activity_type._get_reminder_offsets(), [])
 
     def test_empty_reminders(self):
         activity_type = self.MailActivityType.create({
