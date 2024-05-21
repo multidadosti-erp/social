@@ -238,14 +238,19 @@ class MailActivity(models.Model):
         """
         res = super().action_create_calendar_event()
 
-        # Cria evento do calendário se o start for fornecido e abre
-        # o form dele direto caso tenha sido criado.
         CalendarEvent = self.env['calendar.event'].with_context(res['context'])
-        if self.start:
-            try:
-                calendar_event = CalendarEvent.create(self.get_calendar_event_vals())
-            except:
-                calendar_event = False
+        if self.start or self.calendar_event_id:
+            if not self.calendar_event_id:
+                # Cria evento do calendário e abre o form
+                # dele direto caso tenha sido criado.
+                try:
+                    calendar_event = CalendarEvent.create(self.get_calendar_event_vals())
+                except:
+                    calendar_event = False
+            else:
+                # abre o form do evento do calendário relacionado
+                calendar_event = self.calendar_event_id
+
             if calendar_event:
                 res['res_id'] = calendar_event.id
                 res['view_mode'] = 'form,tree,calendar'
@@ -259,15 +264,15 @@ class MailActivity(models.Model):
 
         Args:
             values (dict): valores de atualização da atividade
-
         Returns:
             bool: Resultado da atualização
         """
         res = super(MailActivity, self).write(values)
         for rec in self:
-            if rec.calendar_event_id:
-                if 'start' in values:
-                    self.calendar_event_id.start = values['start']
-                if 'stop' in values:
-                    self.calendar_event_id.start = values['stop']
+            if self._context.get('calendar_from_activity'):
+                if rec.calendar_event_id:
+                    if 'start' in values:
+                        self.calendar_event_id.start = values['start']
+                    if 'stop' in values:
+                        self.calendar_event_id.start = values['stop']
         return res
