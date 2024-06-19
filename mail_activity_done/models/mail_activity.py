@@ -19,7 +19,7 @@ class MailActivity(models.Model):
         selection_add=[
             ('done', 'Done')
         ],
-        store=True,
+        store=False,
         compute='_compute_state'
     )
 
