@@ -76,7 +76,7 @@
          <field name="model">mail.activity</field>
          <field name="priority" eval="10"/>
          <field name="arch" type="xml">
-            <kanban class="o_activity_kanban_view _kanban_small_column"
+            <kanban class="o_activity_kanban_view _kanban_small_column br_base_kanban"
                     default_group_by="user_id"
                     default_order="date_deadline,start,calendar_event_id_start"
                     archivable="0"
@@ -168,7 +168,7 @@
                                     </div>
                                 </div>
                                 <div name="main-content">
-                                    <div>
+                                    <div name="summary-container">
                                         <field name="summary"
                                                style="font-weight: bold"/>
                                     </div>
