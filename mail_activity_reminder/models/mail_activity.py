@@ -93,6 +93,24 @@ class MailActivity(models.Model):
                 datetime.combine(activity.date_deadline, time.max)
             ).astimezone(UTC).replace(tzinfo=None)
 
+    def _channel_notify_message(self, message_values):
+        """ Envio de mensagem pelo chat do sistema, do BOT para
+        o usuário atribuído à atividade, para notificar a
+        atribuição à atividade.
+
+        Args:
+            message_values (dict): parâmetros para envio da
+                mensagem.
+        """
+        # O channel deve estar presente nos valores da mensagem
+        channel_id = message_values.pop('channel_id', False)
+        if not channel_id:
+            return
+
+        channel_id.with_context(
+            mail_create_nosubscribe=True, odoobot_do_not_answer=True
+        ).sudo().message_post(**message_values)
+
     @api.multi
     def action_notify_message_channel(self):
         odoobot = self.env['res.users'].browse(SUPERUSER_ID)
@@ -111,19 +129,23 @@ class MailActivity(models.Model):
 
             action_id = self.env.ref('mail.mail_activity_action')
             url = '/web#id={0}&action={1}&model=mail.activity&view_type=form'.format(activity.id, action_id.id)
-            body = _('<p> <b>Activity Type : </b><i class="fa {4}" style="color:red;"/> "{0}"</p> <b>Date : </b>{1}<p><b>Assigned'\
-                ' By: {2}</b></p> </br><b></b> <a href="{3}">Click to check detail activity'\
-                '</a></b> </br>').format(activity.activity_type_id.name, activity.date_deadline, activity.create_user_id.name, url, activity.icon)
+            body = _('<p> <b>Activity Type :</b> <i class="fa {3}" style="color:red;"/> "{0}"</p> '
+                     '<p> <b>Date :</b> {1}</p> <p> <b>Assigned By: {2}</b> </p> '
+            ).format(activity.activity_type_id.name, activity.date_deadline, activity.create_user_id.name, activity.icon)
 
             if(activity.summary):
-                body += _('<p><b>Summary: </b>{0}</p>').format(activity.summary)
+                body += _('<p><b>Summary:</b>{0}</p>').format(activity.summary)
 
-            channel_id.with_context(
-                mail_create_nosubscribe=True, odoobot_do_not_answer=True).sudo().message_post(
-                    author_id=odoobot.id,
-                    body=body,
-                    message_type='comment',
-                    subtype_id=self.env.ref('mail.mt_comment').id)
+            body += _('<a href="%s">Click to check detail activity </a> </br> ') % url
+
+            values = {
+                'channel_id': channel_id,
+                'author_id': odoobot.id,
+                'body': body,
+                'message_type': 'comment',
+                'subtype_id': self.env.ref('mail.mt_comment').id
+            }
+            self._channel_notify_message(values)
 
     @api.multi
     def action_notify(self):
