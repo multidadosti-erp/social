@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-27 18:01+0000\n"
-"PO-Revision-Date: 2024-02-27 18:01+0000\n"
+"POT-Creation-Date: 2024-09-17 19:22+0000\n"
+"PO-Revision-Date: 2024-09-17 19:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,22 +16,28 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_activity_reminder
-#: code:addons/mail_activity_reminder/models/mail_activity.py:123
+#: code:addons/mail_activity_reminder/models/mail_activity.py:182
 #, python-format
 msgid "%s: %s assigned to you, %d day(s) remaining"
 msgstr "%s: %s atribuído a você, %d dia(s) restante(s)"
 
 #. module: mail_activity_reminder
-#: code:addons/mail_activity_reminder/models/mail_activity.py:158
+#: code:addons/mail_activity_reminder/models/mail_activity.py:139
 #, python-format
-msgid "<p> <b>Activity Type : </b><i class=\"fa {4}\" style=\"color:red;\"/> \"{0}\"</p> <b>Date : </b>{1}<p><b>Assigned By: {2}</b></p> </br><b></b> <a href=\"{3}\">Click to check detail activity</a></b> </br>"
-msgstr "<p> <b>Tipo de Atividade : </b><i class=\"fa {4}\" style=\"color:red;\"/> \"{0}\"</p> <b>Data : </b>{1}<p><b>Atribuído por : {2}</b></p> </br><b></b> <a href=\"{3}\">Clique aqui para verificar a atividade detalhada</a></b> </br>"
+msgid "<a href=\"%s\">Click to check detail activity </a> </br> "
+msgstr "<a href=\"%s\">Clique para ver a Atividade </a> </br> "
 
 #. module: mail_activity_reminder
-#: code:addons/mail_activity_reminder/models/mail_activity.py:163
+#: code:addons/mail_activity_reminder/models/mail_activity.py:132
 #, python-format
-msgid "<p><b>Summary: </b>{0}</p>"
-msgstr "<p><b>Resumo: </b>{0}</p>"
+msgid "<p> <b>Activity Type :</b> <i class=\"fa {3}\" style=\"color:red;\"/> \"{0}\"</p> <p> <b>Date :</b> {1}</p> <p> <b>Assigned By: {2}</b> </p> "
+msgstr "<p> <b>Tipo da Atividade :</b> <i class=\"fa {3}\" style=\"color:red;\"/> \"{0}\"</p> <p> <b>Data :</b> {1}</p> <p> <b>Atribuído por: {2}</b> </p> "
+
+#. module: mail_activity_reminder
+#: code:addons/mail_activity_reminder/models/mail_activity.py:137
+#, python-format
+msgid "<p><b>Summary:</b> {0}</p>"
+msgstr "<p><b>Resumo:</b> {0}</p>"
 
 #. module: mail_activity_reminder
 #: model:ir.model.fields,help:mail_activity_reminder.field_mail_activity_type__reminders
@@ -74,3 +80,4 @@ msgstr "Próximo lembrete"
 #: model:ir.model.fields,field_description:mail_activity_reminder.field_mail_activity_type__reminders
 msgid "Reminders"
 msgstr "Lembretes"
+

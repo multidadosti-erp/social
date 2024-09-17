@@ -134,7 +134,7 @@ class MailActivity(models.Model):
             ).format(activity.activity_type_id.name, activity.date_deadline, activity.create_user_id.name, activity.icon)
 
             if(activity.summary):
-                body += _('<p><b>Summary:</b>{0}</p>').format(activity.summary)
+                body += _('<p><b>Summary:</b> {0}</p>').format(activity.summary)
 
             body += _('<a href="%s">Click to check detail activity </a> </br> ') % url
 
