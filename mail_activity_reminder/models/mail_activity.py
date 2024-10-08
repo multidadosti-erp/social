@@ -129,12 +129,23 @@ class MailActivity(models.Model):
 
             action_id = self.env.ref('mail.mail_activity_action')
             url = '/web#id={0}&action={1}&model=mail.activity&view_type=form'.format(activity.id, action_id.id)
-            body = _('<p> <b>Activity Type :</b> <i class="fa {3}" style="color:red;"/> "{0}"</p> '
-                     '<p> <b>Date :</b> {1}</p> <p> <b>Assigned By: {2}</b> </p> '
-            ).format(activity.activity_type_id.name, activity.date_deadline, activity.create_user_id.name, activity.icon)
+            body = (
+                '<p> <b>{label_1} :</b> <i class="fa {icon}" style="color:red;"/> '
+                '"{act_name}"</p> <p> <b>{label_2} :</b> {date_deadline}</p> <p> '
+                '<b>{label_3} : {user_name}</b> </p> '
+            ).format(**{
+                'label_1': _('Activity Type'),
+                'label_2': _('Date'),
+                'label_3': _('Assigned By'),
+                'icon': activity.activity_type_id.name,
+                'act_name': activity.date_deadline,
+                'date_deadline': activity.create_user_id.name,
+                'user_name': activity.icon
+            })
 
-            if(activity.summary):
-                body += _('<p><b>Summary:</b> {0}</p>').format(activity.summary)
+            if (activity.summary):
+                body += '<p><b>{0}:</b> {1}</p>'.format(
+                    _('Summary'), activity.summary)
 
             body += _('<a href="%s">Click to check detail activity </a> </br> ') % url
 
