@@ -34,6 +34,7 @@ class MailActivity(models.Model):
             ("active", "Active"),
             ("canceled", "Canceled"),
             ("completed", "Completed"),
+            ('reserved', 'Reserved'),
         ],
         default="active",
     )
