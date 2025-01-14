@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
 
-    <t t-extend="mail.systray.ActivityMenu">
+    <!-- opcao de visualizar todas as atividades nao obedece permissao
+    exibindo todos as atividades mesmo quando o usuario tem permissao
+    de ver somente as suas permissoes -->
+
+    <!-- <t t-extend="mail.systray.ActivityMenu">
         <t t-jquery=".o_mail_systray_dropdown_items" t-operation="before">
             <div class="o_mail_systray_dropdown_top">
                 <button type="button" class="btn btn-link o_all_activities_button">Open All</button>
             </div>
         </t>
-    </t>
+    </t> -->
 
 </templates>
