@@ -102,23 +102,34 @@ class MailActivity(models.Model):
     @api.multi
     def open_origin(self):
         self.ensure_one()
-        vid = self.env[self.res_model].browse(self.res_id).get_formview_id()
-        response = {
-            'type': 'ir.actions.act_window',
-            'res_model': self.res_model,
-            'view_mode': 'form',
-            'res_id': self.res_id,
-            'target': 'current',
-            'flags': {
-                'form': {
-                    'action_buttons': False
-                }
-            },
-            'views': [
-                (vid, "form")
-            ]
-        }
-        return response
+        if "sale.order" in self.res_model:
+            res_model = "sale.order"
+        else:
+            res_model = self.res_model
+
+        model_id = self.env["ir.model"].sudo().search([("model", "=", res_model)])
+
+        if model_id:
+            group_ids = ", ".join(
+                str(x) for x in model_id.access_ids.mapped("group_id").ids
+            )
+        else:
+            group_ids = False
+
+        if self.user_has_groups(groups=False, group_ids=group_ids):
+            vid = self.env[self.res_model].browse(self.res_id).get_formview_id()
+            response = {
+                "type": "ir.actions.act_window",
+                "res_model": self.res_model,
+                "view_mode": "form",
+                "res_id": self.res_id,
+                "target": "current",
+                "flags": {"form": {"action_buttons": False}},
+                "views": [(vid, "form")],
+            }
+            return response
+        else:
+            return False
 
     @api.model
     def action_activities_board(self):
