@@ -96,7 +96,27 @@
         </field>
     </record>
 
-    <record id="mail_activity_view_calendar" model="ir.ui.view">
+        <record id="mail_activity_view_calendar" model="ir.ui.view">
+            <field name="name">mail.activity.inherit</field>
+            <field name="model">mail.activity</field>
+            <field name="inherit_id" ref="mail.mail_activity_view_calendar"/>
+            <field name="arch" type="xml">
+                <xpath expr="/calendar" position="replace">
+                    <calendar string="Events" date_start="start" date_stop="stop" date_delay="duration"
+                              color="activity_type_id">
+                        <field name="summary"/>
+                        <field name="state"/>
+                        <field name="date_done"/>
+                        <field name="user_id" avatar_field="image_small"/>
+                        <field name="create_user_id" avatar_field="image_small"/>
+                        <!-- <field name="clinic_id" avatar_field="image_small"/> -->
+                    </calendar>
+                </xpath>
+            </field>
+        </record>
+
+
+    <!-- <record id="mail_activity_view_calendar" model="ir.ui.view">
         <field name="name">mail.activity.view.calendar</field>
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail.mail_activity_view_calendar"/>
@@ -107,6 +127,6 @@
                 <field name="date_done"/>
             </field>
         </field>
-    </record>
+    </record> -->
 
 </odoo>
