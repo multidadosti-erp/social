@@ -98,13 +98,13 @@
                 <field name="date_deadline"/>
                 <field name="start"/>
                 <field name="stop"/>
+                <field name="calendar_event_id"/>
                 <field name="calendar_event_id_start"/>
                 <templates>
                     <t t-name="kanban-box">
                         <t t-set="state_class" t-value="'state-' + record.state.raw_value"/>
                         <t t-set="status_class" t-value="'status-' + record.status.raw_value"/>
                         <t t-set="start_class" t-value="'state-' + record.datetime_state.raw_value"/>
-
                         <t t-set="start_moment" t-value="record.start.moment or record.calendar_event_id_start.moment"/>
 
                         <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
@@ -172,9 +172,9 @@
                                         <field name="summary"
                                                style="font-weight: bold"/>
                                     </div>
-                                    <div>
+                                    <div attrs="{'invisible': [('calendar_event_id', '!=', False)]}">
                                         <a name="open_origin" type="object">
-                                            <field name="res_name"/>
+                                            <field name="display_name"/>
                                         </a>
                                     </div>
                                 </div>
