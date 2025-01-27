@@ -48,18 +48,6 @@ class MailActivity(models.Model):
         readonly=True,
     )
 
-    start = fields.Datetime(
-        index=True,
-        track_visibility="onchange",
-    )  # Campos para Migrar no Calendar Event
-
-    stop = fields.Datetime(
-        index=True,
-        track_visibility="onchange",
-    )  # Campos para Migrar no Calendar Event
-
-    duration = fields.Float()  # Campos para Migrar no Calendar Event
-
     location = fields.Char()  # Campos para Migrar no Calendar Event
 
     event_datetime_start = (
@@ -102,36 +90,6 @@ class MailActivity(models.Model):
         """
         for rec in self:
             rec.display_name = rec.get_display_name()
-
-    @api.onchange("start")
-    def _onchange_start(self):
-        """Mantém o campo 'date_deadline' atualizado com o start
-        e o stop maior que o start.
-        """
-        start = self.start
-        if start:
-            self.date_deadline = start.date()
-            if self.stop and self.stop < start:
-                self.stop = start + relativedelta(hours=1)
-                return {
-                    "warning": {
-                        "title": _("Warning"),
-                        "message": _("Stop time must be greather than start time."),
-                    }
-                }
-
-    @api.onchange("stop")
-    def _onchange_stop(self):
-        """Mantém stop maior que start"""
-        start, stop = self.start, self.stop
-        if (start and stop) and stop < start:
-            self.stop = start + relativedelta(hours=1)
-            return {
-                "warning": {
-                    "title": _("Warning"),
-                    "message": _("Stop time must be greather than start time."),
-                }
-            }
 
     @api.multi
     def open_origin(self):

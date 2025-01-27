@@ -109,24 +109,8 @@
                         <field name="date_done"/>
                         <field name="user_id" avatar_field="image_small"/>
                         <field name="create_user_id" avatar_field="image_small"/>
-                        <!-- <field name="clinic_id" avatar_field="image_small"/> -->
                     </calendar>
                 </xpath>
             </field>
         </record>
-
-
-    <!-- <record id="mail_activity_view_calendar" model="ir.ui.view">
-        <field name="name">mail.activity.view.calendar</field>
-        <field name="model">mail.activity</field>
-        <field name="inherit_id" ref="mail.mail_activity_view_calendar"/>
-        <field name="priority" eval="2"/>
-        <field name="arch" type="xml">
-            <field name="summary" position="after">
-                <field name="state"/>
-                <field name="date_done"/>
-            </field>
-        </field>
-    </record> -->
-
 </odoo>
