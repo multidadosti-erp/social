@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models, _
 from datetime import date
+from dateutil.relativedelta import relativedelta
 
 
 class MailActivity(models.Model):
@@ -42,6 +43,50 @@ class MailActivity(models.Model):
     type_id_show_on_plan_activities = fields.Boolean(
         related="activity_type_id.show_on_plan_activities",
     )
+
+    start = fields.Datetime(
+        index=True,
+        track_visibility="onchange",
+    )  # Campos para Migrar no Calendar Event
+
+    stop = fields.Datetime(
+        index=True,
+        track_visibility="onchange",
+    )  # Campos para Migrar no Calendar Event
+
+    duration = fields.Float()  # Campos para Migrar no Calendar Event
+
+    @api.onchange("start")
+    def _onchange_start(self):
+        """Mantém o campo 'date_deadline' atualizado com o start
+        e o stop maior que o start.
+        """
+        start = self.start
+
+        if start:
+            self.date_deadline = start.date()
+            if self.stop and self.stop < start:
+                self.stop = start + relativedelta(hours=1)
+                return {
+                    "warning": {
+                        "title": _("Warning"),
+                        "message": _("Stop time must be greather than start time."),
+                    }
+                }
+
+    @api.onchange("stop")
+    def _onchange_stop(self):
+        """Mantém stop maior que start"""
+        start, stop = self.start, self.stop
+
+        if (start and stop) and stop < start:
+            self.stop = start + relativedelta(hours=1)
+            return {
+                "warning": {
+                    "title": _("Warning"),
+                    "message": _("Stop time must be greather than start time."),
+                }
+            }
 
     def _search_state(self, operator, operand):
         """Método para Pesquisar o Campo State que é computed
