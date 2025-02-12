@@ -120,6 +120,20 @@ class MailActivity(models.Model):
 
         return [("id", "in", ids)]
 
+    @api.multi
+    def _get_activity_data_basic_domain(self, res_model):
+        """ Adicionado filtro para obter somente atividades ativas.
+
+        Args:
+            res_model (str): model a encontrar atividades
+
+        Returns:
+            list: domain para busca de atividades
+        """
+        res = super(MailActivity, self)._get_activity_data_basic_domain(res_model)
+        res.extend([("active", "=", True), ("done", "=", False)])
+        return res
+
     @api.depends("date_deadline", "done")
     def _compute_state(self):
         super(MailActivity, self)._compute_state()
