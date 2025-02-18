@@ -20,7 +20,7 @@
         'security/ir.model.access.csv',
         'security/mail_activity_team_security.xml',
         'views/mail_activity_team_views.xml',
-        'views/mail_activity_views.xml',
+        # 'views/mail_activity_views.xml',
         'views/res_users_views.xml',
     ],
     'demo': [
