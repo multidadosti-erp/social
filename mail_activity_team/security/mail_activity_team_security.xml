@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="0">
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('model', 'in', ['ir.rule']),
+                          ('name', '=', 'mail_activity_rule_my_team')]"/>
+        </function>
+        <value eval="{'noupdate': False}"/>
+    </function>
 
     <record id="mail_activity_rule_my_team" model="ir.rule">
         <field name="name">mail.activity: user: my team</field>
         <field name="model_id" ref="mail.model_mail_activity"/>
-        <field name="domain_force">["|", ('team_id', 'in', user.activity_team_ids.ids), ('user_id', 'in', user.activity_team_ids.member_ids.ids)]</field>
+        <field name="domain_force">["|", "|", "|",
+                                    ('team_id', 'in', user.activity_team_ids.ids),
+                                    ('user_id', 'in', user.activity_team_ids.mapped('member_ids').ids),
+                                    ('user_id', '=', user.id),
+                                    ('create_user_id', '=', user.id)]</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         <field name="perm_create" eval="True"/>
         <field name="perm_read" eval="True"/>
