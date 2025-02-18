@@ -55,6 +55,7 @@ class MailActivityTeam(models.Model):
 
     @api.onchange('member_ids')
     def _onchange_member_ids(self):
+        self.env['ir.rule'].clear_caches()
         if self.user_id and self.user_id not in self.member_ids:
             self.user_id = False
 
