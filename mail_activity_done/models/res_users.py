@@ -1,57 +1,28 @@
 # Copyright 2018 Eficent <http://www.eficent.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
-from odoo import api, fields, models, modules
+from odoo import models
 
 
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    @api.model
-    def systray_get_activities(self):
-        # Here we totally override the method. Not very nice, but
-        # we should perhaps ask Odoo to add a hook here.
-        query = """SELECT m.id, count(*), act.res_model as model,
-                        CASE
-                            WHEN %(today)s::date - act.date_deadline::date = 0 Then 'today'
-                            WHEN %(today)s::date - act.date_deadline::date > 0 Then 'overdue'
-                            WHEN %(today)s::date - act.date_deadline::date < 0 Then 'planned'
-                        END AS states
-                    FROM mail_activity AS act
-                        JOIN ir_model AS m ON act.res_model_id = m.id
-                        JOIN mail_activity_type mat on act.activity_type_id = mat.id
 
-                    WHERE act.user_id = %(user_id)s
-                      AND act.done = False
-                      AND act.status = 'active'
-                      AND mat.show_on_plan_activities = True
+    def _systray_activities_data_query(self):
+        """ Adiciona na query retornada, o JOIN e WHERE no local correto.
 
-                    GROUP BY m.id, states, act.res_model;
-                """
-        self.env.cr.execute(query, {
-            'today': fields.Date.context_today(self),
-            'user_id': self.env.uid,
-        })
-        activity_data = self.env.cr.dictfetchall()
-        model_ids = [a['id'] for a in activity_data]
-        model_names = {n[0]: n[1] for n in self.env['ir.model'].browse(
-            model_ids).name_get()}
+        Utiliza um dicionário com o termo a ser adicionado como valor e
+        a posição da string que ele deverá ser adicionado.
 
-        user_activities = {}
-        for activity in activity_data:
-            if not user_activities.get(activity['model']):
-                user_activities[activity['model']] = {
-                    'name': model_names[activity['id']],
-                    'model': activity['model'],
-                    'icon': modules.module.get_module_icon(
-                        self.env[activity['model']]._original_module),
-                    'total_count': 0, 'today_count': 0,
-                    'overdue_count': 0, 'planned_count': 0,
-                    'type': 'activity',
-                }
-            user_activities[activity['model']][
-                '%s_count' % activity['states']] += activity['count']
-            if activity['states'] in ('today', 'overdue'):
-                user_activities[activity['model']][
-                    'total_count'] += activity['count']
+        Returns:
+            str: Query para busca de atividades ativas do usuário.
+        """
+        add_term_before = {
+            'where': " JOIN mail_activity_type mat on act.activity_type_id = mat.id ",
+            'group by': " AND act.done = False AND act.status = 'active' AND mat.show_on_plan_activities = True "
+        }
+        res = super(ResUsers, self)._systray_activities_data_query()
 
-        return list(user_activities.values())
+        for before, term in add_term_before.items():
+            term_index = res.find(before.upper())
+            res = res[:term_index] + term + res[term_index:]
+        return res
