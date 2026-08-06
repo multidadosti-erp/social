@@ -301,8 +301,14 @@ class MailActivity(models.Model):
         for rec in self:
             if self._context.get("calendar_from_activity"):
                 if rec.calendar_event_id:
+                    event_vals = {}
                     if "start" in values:
-                        self.calendar_event_id.start = values["start"]
+                        event_vals["start"] = values["start"]
                     if "stop" in values:
-                        self.calendar_event_id.start = values["stop"]
+                        event_vals["stop"] = values["stop"]
+                    if event_vals:
+                        rec.calendar_event_id.with_context(
+                            skip_calendar_activity_sync=True,
+                            skip_activity_calendar_sync=True,
+                        ).write(event_vals)
         return res
